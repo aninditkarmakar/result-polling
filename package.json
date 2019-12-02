@@ -1,0 +1,14 @@
+{
+  "name": "afcat-polling",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "azure": "^2.3.1-preview",
+    "cheerio": "^1.0.0-rc.3",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {}
+}
