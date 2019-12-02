@@ -7,17 +7,26 @@ module.exports = async function (context, myTimer) {
     {
         context.log('JavaScript is running late!');
     }
-    await sendRequest();
+    await sendRequest(context);
     context.log('JavaScript timer trigger function ran!', timeStamp);
     context.done(); 
 };
 
-async function sendRequest() {
+async function sendRequest(context) {
     return new Promise((resolve, reject) => {
         var url = process.env["FUNCTION_BASE_URL"] + "/AfcatPolling";
-        request.get(url)
-        .on('response', function(response) {
-            resolve(response);
+        request({
+            method: 'GET',
+            uri: url
+        },
+        function(err, res, body) {
+            if(!err && res.statusCode === 200) {
+                context.log(body);
+                resolve(body);
+                return;
+            }
+            reject(err.message);
+            return;
         });
     })
 }
